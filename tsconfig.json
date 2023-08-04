@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "paths": {
+      "@/*": ["./*"] // 프로젝트내 파일을 절대경로로 로드하기 위한 별칭
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc && node dist",
+    "dev": "ts-node ."
+  }
+}
