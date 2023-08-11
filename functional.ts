@@ -33,3 +33,13 @@ export function* filter<T>(
   yield* filter(iter, callback, index + 1);
 }
 
+export function* map<T, R>(
+  iter: Iterable<T>,
+  callback: (curr: T, index?: number) => R,
+  index: number = 0
+): Iterable<R> {
+  const { value, done } = iter[Symbol.iterator]().next();
+  if (done) return;
+  yield callback(value, index);
+  yield* map(iter, callback, index + 1);
+}
