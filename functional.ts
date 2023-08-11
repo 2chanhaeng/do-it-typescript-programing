@@ -11,3 +11,14 @@ export function* range(
   }
 }
 
+export function fold<T, R>(
+  iter: Iterable<T>,
+  callback: (acc: R, curr: T) => R,
+  initial: R,
+  index: number = 0
+): R {
+  const { value, done } = iter[Symbol.iterator]().next();
+  if (done) return initial;
+  return fold(iter, callback, callback(initial, value), index + 1);
+}
+
