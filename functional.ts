@@ -22,3 +22,14 @@ export function fold<T, R>(
   return fold(iter, callback, callback(initial, value), index + 1);
 }
 
+export function* filter<T>(
+  iter: Iterable<T>,
+  callback: (curr: T, index?: number) => boolean,
+  index: number = 0
+): Iterable<T> {
+  const { value, done } = iter[Symbol.iterator]().next();
+  if (done) return;
+  if (callback(value, index)) yield value;
+  yield* filter(iter, callback, index + 1);
+}
+
