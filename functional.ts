@@ -43,3 +43,26 @@ export function* map<T, R>(
   yield callback(value, index);
   yield* map(iter, callback, index + 1);
 }
+
+function oneOrZero(n: number) {
+  return n === 0 ? 0 : n > 0 ? 1 : -1;
+}
+
+export function sort<T>(
+  arr: readonly T[],
+  compareFunction: (a: T, b: T) => number = (a, b) => <any>b - <any>a
+): T[] {
+  if (arr.length <= 1) {
+    return arr as T[];
+  }
+  const cmp = (a: T, b: T) => oneOrZero(compareFunction(a, b));
+  const rest: T[] = structuredClone(arr) as T[];
+  const pivot = rest.shift()!;
+  const left: T[] = [];
+  const same: T[] = [pivot];
+  const right: T[] = [];
+  rest.forEach((curr) => {
+    [same, left, right].at(cmp(curr, pivot))?.push(curr);
+  });
+  return [sort(left, cmp), same, sort(right, cmp)].flat(1);
+}
