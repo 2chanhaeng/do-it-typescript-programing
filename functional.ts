@@ -66,3 +66,15 @@ export function sort<T>(
   });
   return [sort(left, cmp), same, sort(right, cmp)].flat(1);
 }
+
+export const compose =
+  <T, R>(...fns: Function[]) =>
+  (x: T): R =>
+    fns.reduceRight((v, f) => f(v), x) as unknown as R;
+
+export const pipe =
+  <T, R>(...fns: Function[]) =>
+  (x: T) =>
+    fns.reduce((v, f) => f(v), x) as unknown as R;
+
+export const iter = <T>(arr: Array<T>) => arr[Symbol.iterator]();
