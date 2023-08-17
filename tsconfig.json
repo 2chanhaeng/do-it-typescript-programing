@@ -10,6 +10,7 @@
     "baseUrl": ".",
     "sourceMap": true,
     "noImplicitAny": true,
+    "moduleResolution": "nodenext",
     "paths": {
       "@/*": ["./*"] // 프로젝트내 파일을 절대경로로 로드하기 위한 별칭
     }
