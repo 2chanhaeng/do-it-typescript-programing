@@ -85,6 +85,22 @@ function oneOrZero(n: number) {
   return n === 0 ? 0 : n > 0 ? 1 : -1;
 }
 
+export function enumerate<T>(iterable: Iterable<T> | T[], start: number = 0) {
+  return Array.isArray(iterable)
+    ? enumerateIter(iter(iterable), start)
+    : enumerateIter(iterable, start);
+}
+
+function* enumerateIter<T>(
+  iter: Iterable<T>,
+  start: number = 0
+): Iterable<[number, T]> {
+  const { value, done } = iter[Symbol.iterator]().next();
+  if (done) return;
+  yield [start, value];
+  yield* enumerateIter(iter, start + 1);
+}
+
 export function sort<T>(
   arr: readonly T[],
   compareFunction: (a: T, b: T) => number = (a, b) => <any>b - <any>a
