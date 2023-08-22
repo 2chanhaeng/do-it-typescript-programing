@@ -2,26 +2,26 @@ import Chance from "chance";
 
 const c = new Chance();
 
-interface ICoordinates {
+export interface ICoordinates {
   latitude: number;
   longitude: number;
 }
 
-class Coordinates implements ICoordinates {
+export class Coordinates implements ICoordinates {
   constructor(
     public latitude: number = c.latitude(),
     public longitude: number = c.longitude()
   ) {}
 }
 
-interface ILocation {
+export interface ILocation {
   coordinates: ICoordinates;
   country: string;
   city: string;
   address: string;
 }
 
-class Location implements ILocation {
+export class Location implements ILocation {
   constructor(
     public coordinates: ICoordinates = new Coordinates(),
     public country: string = c.country(),
@@ -30,14 +30,14 @@ class Location implements ILocation {
   ) {}
 }
 
-interface IPerson {
+export interface IPerson {
   name: string;
   age: number;
   title: string;
   location: ILocation;
 }
 
-class Person implements IPerson {
+export class Person implements IPerson {
   constructor(
     public name: string = c.name(),
     public age: number = c.age(),
@@ -45,5 +45,3 @@ class Person implements IPerson {
     public location: ILocation = new Location()
   ) {}
 }
-
-console.log(new Person());
